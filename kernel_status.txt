@@ -1,0 +1,118 @@
+# On branch tf4_master
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   arch/arm/configs/tf4_dvt_android_defconfig
+#	modified:   arch/arm/configs/tf4_pvt_android_defconfig
+#	modified:   arch/arm/configs/tf4_pvt_wqxga_android_defconfig
+#	modified:   arch/arm/mach-exynos/board-tf4-media.c
+#	modified:   arch/arm/mach-exynos/dev-fimc-is.c
+#	modified:   arch/arm/mach-exynos/dev-tmu.c
+#	modified:   arch/arm/mach-exynos/include/mach/irqs.h
+#	modified:   arch/arm/mach-exynos/include/mach/map.h
+#	modified:   arch/arm/mach-exynos/include/mach/tmu.h
+#	modified:   arch/arm/mach-exynos/mach-tf4.c
+#	modified:   arch/arm/mach-exynos/setup-fimc-is.c
+#	modified:   arch/arm/plat-samsung/devs.c
+#	modified:   arch/arm/plat-samsung/include/plat/devs.h
+#	modified:   drivers/cpufreq/cpufreq_april.c
+#	modified:   drivers/cpufreq/cpufreq_ondemand.c
+#	modified:   drivers/cpufreq/exynos-ikcs-cpufreq.c
+#	modified:   drivers/devfreq/exynos5410_bus_int.c
+#	modified:   drivers/gpio/gpio-wm8994.c
+#	modified:   drivers/gpu/pvr/Makefile
+#	modified:   drivers/gpu/pvr/include4/services.h
+#	modified:   drivers/gpu/pvr/services4/3rdparty/s3c_lcd/s3c_displayclass.c
+#	modified:   drivers/gpu/pvr/services4/include/sgx_ukernel_status_codes.h
+#	modified:   drivers/gpu/pvr/services4/srvkm/bridged/bridged_pvr_bridge.c
+#	modified:   drivers/gpu/pvr/services4/srvkm/common/hash.c
+#	modified:   drivers/gpu/pvr/services4/srvkm/common/pvrsrv.c
+#	modified:   drivers/gpu/pvr/services4/srvkm/common/resman.c
+#	modified:   drivers/gpu/pvr/services4/srvkm/devices/sgx/mmu.c
+#	modified:   drivers/gpu/pvr/services4/srvkm/devices/sgx/sgxinit.c
+#	modified:   drivers/gpu/pvr/services4/srvkm/devices/sgx/sgxpower.c
+#	modified:   drivers/gpu/pvr/services4/srvkm/devices/sgx/sgxutils.c
+#	modified:   drivers/gpu/pvr/services4/srvkm/env/linux/ion.c
+#	modified:   drivers/gpu/pvr/services4/srvkm/env/linux/mm.c
+#	modified:   drivers/gpu/pvr/services4/srvkm/env/linux/mmap.c
+#	modified:   drivers/gpu/pvr/services4/srvkm/env/linux/module.c
+#	modified:   drivers/gpu/pvr/services4/srvkm/env/linux/osfunc.c
+#	modified:   drivers/gpu/pvr/services4/srvkm/hwdefs/sgx544defs.h
+#	modified:   drivers/gpu/pvr/services4/srvkm/hwdefs/sgxfeaturedefs.h
+#	modified:   drivers/gpu/pvr/services4/system/exynos5410/sec_clock.c
+#	modified:   drivers/gpu/pvr/services4/system/exynos5410/sec_clock.h
+#	modified:   drivers/gpu/pvr/services4/system/exynos5410/sec_control_pwr_clk.c
+#	modified:   drivers/gpu/pvr/services4/system/exynos5410/sec_control_pwr_clk.h
+#	modified:   drivers/gpu/pvr/services4/system/exynos5410/sec_dvfs.c
+#	modified:   drivers/gpu/pvr/services4/system/exynos5410/sec_dvfs.h
+#	modified:   drivers/gpu/pvr/services4/system/exynos5410/sec_power.c
+#	modified:   drivers/gpu/pvr/services4/system/exynos5410/sec_power.h
+#	modified:   drivers/gpu/pvr/services4/system/exynos5410/secutils.c
+#	modified:   drivers/gpu/pvr/services4/system/exynos5410/secutils.h
+#	modified:   drivers/gpu/pvr/services4/system/exynos5410/sysconfig.c
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-cmd.h
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-core.c
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-core.h
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-device-flite.c
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-device-ischain.c
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-device-ischain.h
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-device-sensor.c
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-device-sensor.h
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-framemgr.c
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-framemgr.h
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-groupmgr.c
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-interface.c
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-interface.h
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-metadata.h
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-spi.c
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-video-3a0.c
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-video-3a1.c
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-video-isp.c
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-video-sensor0.c
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-video-sensor1.c
+#	modified:   drivers/media/video/exynos/fimc-is-mc2/fimc-is-video.c
+#	modified:   drivers/media/video/exynos/fimc-lite/fimc-lite-core.c
+#	modified:   drivers/media/video/exynos/fimg2d/fimg2d_drv.c
+#	modified:   drivers/mfd/sec-irq.c
+#	modified:   drivers/misc/Kconfig
+#	modified:   drivers/misc/Makefile
+#	modified:   drivers/mmc/card/Kconfig
+#	modified:   drivers/mmc/card/block.c
+#	modified:   drivers/mmc/card/queue.c
+#	modified:   drivers/mmc/core/Makefile
+#	modified:   drivers/mmc/core/core.c
+#	modified:   drivers/mmc/core/core.h
+#	modified:   drivers/mmc/core/mmc.c
+#	modified:   drivers/mmc/host/dw_mmc.c
+#	modified:   drivers/power/smb349-charger.c
+#	modified:   drivers/regulator/s2mps11.c
+#	modified:   drivers/rtc/rtc-sec.c
+#	modified:   drivers/spi/spi-s3c64xx.c
+#	modified:   drivers/thermal/Kconfig
+#	modified:   drivers/thermal/cpu_cooling.c
+#	modified:   drivers/thermal/exynos_thermal.c
+#	modified:   drivers/thermal/thermal_sys.c
+#	modified:   drivers/tty/serial/samsung.c
+#	modified:   drivers/video/s3c-fb.c
+#	modified:   include/linux/console.h
+#	modified:   include/linux/mmc/card.h
+#	modified:   include/linux/mmc/core.h
+#	modified:   include/linux/mmc/dw_mmc.h
+#	modified:   include/linux/mmc/host.h
+#	modified:   include/linux/mmc/mmc.h
+#	modified:   include/linux/netfilter/xt_CONNMARK.h
+#	modified:   include/linux/netfilter/xt_dscp.h
+#	modified:   include/linux/netfilter/xt_mark.h
+#	modified:   include/linux/platform_data/exynos_thermal.h
+#	modified:   include/linux/thermal.h
+#	modified:   include/media/exynos_fimc_is.h
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	drivers/misc/exynos-vib.c
+#	drivers/mmc/core/mmc_trace.c
+#	include/linux/mmc/mmc_trace.h
+#	kernel_status.txt
+no changes added to commit (use "git add" and/or "git commit -a")
