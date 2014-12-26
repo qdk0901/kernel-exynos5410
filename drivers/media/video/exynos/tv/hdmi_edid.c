@@ -21,7 +21,7 @@
 #include "hdmi.h"
 
 #define EDID_SEGMENT_ADDR	(0x60 >> 1)
-#define EDID_ADDR		(0xA0 >> 1)
+#define EDID_ADDR		(0xC8 >> 1)
 #define EDID_BLOCK_SIZE		128
 #define EDID_SEGMENT(x)		((x) >> 1)
 #define EDID_OFFSET(x)		(((x) & 1) * EDID_BLOCK_SIZE)

@@ -193,6 +193,18 @@ static struct platform_device yamo5410_wm8994 = {
 
 #endif  // CONFIG_SND_SOC_WM8994
 
+#ifdef CONFIG_SND_SOC_SMDK_LMDAAD
+static struct platform_device lmdaad_soc = {
+	.name = "lmdaad-soc",
+	.id = -1,
+};
+
+static struct platform_device lmdaad_codec = {
+	.name = "lmdaad-codec",
+	.id = -1,
+};
+#endif
+
 static struct platform_device *yamo5410_audio_devices[] __initdata = {
 #ifdef CONFIG_SND_SAMSUNG_I2S
 	&exynos5_device_i2s0,
@@ -214,6 +226,10 @@ static struct platform_device *yamo5410_audio_devices[] __initdata = {
 	&wm8994_pvdd_audio_device,
 	&wm8994_vbat_device,
 	&yamo5410_wm8994,
+#endif
+#ifdef CONFIG_SND_SOC_SMDK_LMDAAD
+	&lmdaad_codec,
+	&lmdaad_soc,
 #endif
 	&samsung_asoc_dma,
 	&samsung_asoc_idma,

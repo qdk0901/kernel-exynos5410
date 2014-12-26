@@ -292,6 +292,13 @@ static void mipi_lcd_set_power(struct plat_lcd_data *pd,
 	//MIPI2LVDS_RST
 		/* reset */
 	gpio_request_one(EXYNOS5410_GPK0(3), GPIOF_OUT_INIT_HIGH, "GPK03");
+	gpio_request_one(EXYNOS5410_GPJ0(1), GPIOF_OUT_INIT_HIGH, "GPJ01");
+	
+	if (power)
+		gpio_set_value(EXYNOS5410_GPJ0(1), 1);
+	else
+		gpio_set_value(EXYNOS5410_GPJ0(1), 0);
+
 	msleep(20);
 	if (power) {
 		msleep(20);

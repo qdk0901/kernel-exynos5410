@@ -870,9 +870,9 @@ static struct regulator_init_data s2m_ldo35_data = {
 		.name		= "vdd_ldo35 range",
 		.min_uV		= 1200000,
 		.max_uV		= 1200000,
-		.always_on	= 0,
-		.boot_on    = 0,		
-		.apply_uV	  = 0,
+		.always_on	= 1,
+		.boot_on    = 1,		
+		.apply_uV	  = 1,
 		.valid_ops_mask	= REGULATOR_CHANGE_STATUS,		
 		.state_mem	= {
 			.enabled	= 1,
@@ -977,6 +977,7 @@ static struct sec_regulator_data exynos_regulators[] = {
 	{S2MPS11_LDO18, &s2m_ldo18_data},	
 	{S2MPS11_LDO19, &s2m_ldo19_data}, 	
 	{S2MPS11_LDO31, &s2m_ldo31_data},
+	{S2MPS11_LDO35, &s2m_ldo35_data},
 	{S2MPS11_CP_EN32KHZ, &s2m_cp_en32khz_data},
 	{S2MPS11_BT_EN32KHZ, &s2m_bt_en32khz_data},
 };
@@ -1003,6 +1004,7 @@ struct sec_opmode_data s2mps11_opmode_data[S2MPS11_REG_MAX] = {
 	[S2MPS11_LDO18] = {S2MPS11_LDO18, SEC_OPMODE_NORMAL},	
 	[S2MPS11_LDO19] = {S2MPS11_LDO19, SEC_OPMODE_NORMAL},	
 	[S2MPS11_LDO31] = {S2MPS11_LDO31, SEC_OPMODE_NORMAL},
+	[S2MPS11_LDO35] = {S2MPS11_LDO35, SEC_OPMODE_NORMAL},
 };
 
 static int sec_cfg_irq(void)

@@ -674,7 +674,7 @@ static int usb_audio_resume(struct usb_interface *intf)
 	struct snd_usb_audio *chip = usb_get_intfdata(intf);
 	struct usb_mixer_interface *mixer;
 	int err = 0;
-
+	
 	if (chip == (void *)-1L)
 		return 0;
 	if (--chip->num_suspended_intf)

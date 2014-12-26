@@ -31,6 +31,7 @@
 
 #include "usb.h"
 
+#define dev_vdbg(dev, fmt, ...) printk(fmt, ##__VA_ARGS__)
 
 #ifdef CONFIG_HOTPLUG
 

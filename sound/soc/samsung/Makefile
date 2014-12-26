@@ -48,6 +48,7 @@ snd-soc-tobermory-objs := tobermory.o
 snd-soc-lowland-objs := lowland.o
 snd-soc-littlemill-objs := littlemill.o
 
+obj-$(CONFIG_SND_SOC_SMDK_LMDAAD) += lmdaad.o
 obj-$(CONFIG_SND_SOC_SAMSUNG_YAMO5410_WM1811) += snd-soc-yamo5410-wm8994.o
 obj-$(CONFIG_SND_SOC_SAMSUNG_YAMO5410_SPDIF) += snd-soc-yamo5410-spdif.o
 obj-$(CONFIG_SND_SOC_SAMSUNG_TF4_WM1811) += snd-soc-tf4-wm1811.o

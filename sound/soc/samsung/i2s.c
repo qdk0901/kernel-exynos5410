@@ -10,6 +10,7 @@
  * published by the Free Software Foundation.
  */
 
+#define DEBUG    1 
 #include <linux/delay.h>
 #include <linux/slab.h>
 #include <linux/clk.h>

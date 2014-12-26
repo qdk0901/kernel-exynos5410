@@ -19,102 +19,92 @@
 #include <plat/cpu.h>
 #include <linux/i2c.h>
 
-static struct {
+static struct reg_val_t {
     unsigned short  reg;    // Control register address
     unsigned int    data;   // Register data value
-} initcode[] = {
-#if 1
-//{ **************************************************
-//{ TC358764/65XBG DSI Basic Parameters.  Following 10 setting should be pefromed in LP mode
-//{ **************************************************
-{ 0x013C, 0x00070009 }, //PPI_TX_RX_TA  BTA parameters
-{ 0x0114, 0x00000006 }, //PPI_LPTXTIMCNT
-{ 0x0164, 0x00000007 }, //PPI_D0S_CLRSIPOCOUNT
-{ 0x0168, 0x00000007 }, //PPI_D1S_CLRSIPOCOUNT
-{ 0x016C, 0x00000007 }, //PPI_D2S_CLRSIPOCOUNT
-{ 0x0170, 0x00000007 }, //PPI_D3S_CLRSIPOCOUNT
-{ 0x0134, 0x0000001F }, //PPI_LANEENABLE
-{ 0x0210, 0x0000001F }, //DSI_LANEENABLE
-{ 0x0104, 0x00000001 }, //PPI_SARTPPI
-{ 0x0204, 0x00000001 }, //DSI_SARTPPI
-//{ **************************************************
-//{ TC358764/65XBG Timing and mode setting
-//{ **************************************************
-{ 0x0450, 0x00000120 }, //VPCTRL
-{ 0x0454, 0x00500014 }, //HTIM1
-//{ 0458
-{ 0x045C, 0x000A000A }, //VTIM1
-//{ 0460
-{ 0x0464, 0x00000001 }, //VFUEN
-{ 0x04A0, 0x00000006 }, //LVPHY0
-//sleep 1
-{ 0x04A0, 0x00000006 }, //LVPHY0
-{ 0x0504, 0x00000004 }, //SYSRST
-//{ **************************************************
-//{ TC358764/65XBG LVDS Color mapping setting
-//{ **************************************************
-{ 0x0480, 0x03020100 }, //LVMX0003
-{ 0x0484, 0x08050704 }, //LVMX0407
-{ 0x0488, 0x0F0E0A09 }, //LVMX0811
-{ 0x048C, 0x100D0C0B }, //LVMX1215
-{ 0x0490, 0x12111716 }, //LVMX1619
-{ 0x0494, 0x1B151413 }, //LVMX2023
-{ 0x0498, 0x061A1918 }, //LVMX2427
-//{ **************************************************
-//{ TC358764/65XBG LVDS enable
-//{ **************************************************
-{ 0x049C, 0x00000403 }, //LVCFG
+};
 
-#else
-{ 0x013C, 0x00060006 }, //PPI_TX_RX_TA  BTA parameters
-{ 0x0114, 0x00000004 }, //PPI_LPTXTIMCNT
-{ 0x0164, 0x00000005 }, //PPI_D0S_CLRSIPOCOUNT
-{ 0x0168, 0x00000005 }, //PPI_D1S_CLRSIPOCOUNT
-{ 0x016C, 0x00000005 }, //PPI_D2S_CLRSIPOCOUNT
-{ 0x0170, 0x00000005 }, //PPI_D3S_CLRSIPOCOUNT
-{ 0x0134, 0x0000001F }, //PPI_LANEENABLE
-{ 0x0210, 0x0000001F }, //DSI_LANEENABLE
-{ 0x0104, 0x00000001 }, //PPI_SARTPPI
-{ 0x0204, 0x00000001 }, //DSI_SARTPPI
-//{ **************************************************
-//{ TC358764/65XBG Timing and mode setting
-//{ **************************************************
-{ 0x0450, 0x00000120 }, //VPCTRL
-{ 0x0454, 0x00500014 },
-//{ 0458
-{ 0x045C, 0x00060002 },
-//{ 0460
-{ 0x0464, 0x00000001 },
-{ 0x04A0, 0x00448006 }, //LVPHY0
-//sleep 1
-{ 0x04A0, 0x00048006 }, //LVPHY0
-{ 0x0504, 0x00000004 }, //SYSRST
-//{ **************************************************
-//{ TC358764/65XBG LVDS Color mapping setting
-//{ **************************************************
-#if 1
-{ 0x0480, 0x03020100 }, //LVMX0003
-{ 0x0484, 0x08050704 }, //LVMX0407
-{ 0x0488, 0x0F0E0A09 }, //LVMX0811
-{ 0x048C, 0x100D0C0B }, //LVMX1215
-{ 0x0490, 0x12111716 }, //LVMX1619
-{ 0x0494, 0x1B151413 }, //LVMX2023
-{ 0x0498, 0x061A1918 }, //LVMX2427
-#else
-{ 0x0480, 0x1A1A1A1A }, //LVMX0003
-{ 0x0484, 0x1A1A071A }, //LVMX0407
-{ 0x0488, 0x0F0E0A09 }, //LVMX0811
-{ 0x048C, 0x100D0C0B }, //LVMX1215
-{ 0x0490, 0x12111716 }, //LVMX1619
-{ 0x0494, 0x1B151413 }, //LVMX2023
-{ 0x0498, 0x061A1918 }, //LVMX2427
+struct reg_val_t initcode_65[] = {
+	//{ **************************************************
+	//{ TC358764/65XBG DSI Basic Parameters.  Following 10 setting should be pefromed in LP mode
+	//{ **************************************************
+	{ 0x013C, 0x00070009 }, //PPI_TX_RX_TA  BTA parameters
+	{ 0x0114, 0x00000006 }, //PPI_LPTXTIMCNT
+	{ 0x0164, 0x00000007 }, //PPI_D0S_CLRSIPOCOUNT
+	{ 0x0168, 0x00000007 }, //PPI_D1S_CLRSIPOCOUNT
+	{ 0x016C, 0x00000007 }, //PPI_D2S_CLRSIPOCOUNT
+	{ 0x0170, 0x00000007 }, //PPI_D3S_CLRSIPOCOUNT
+	{ 0x0134, 0x0000001F }, //PPI_LANEENABLE
+	{ 0x0210, 0x0000001F }, //DSI_LANEENABLE
+	{ 0x0104, 0x00000001 }, //PPI_SARTPPI
+	{ 0x0204, 0x00000001 }, //DSI_SARTPPI
+	//{ **************************************************
+	//{ TC358764/65XBG Timing and mode setting
+	//{ **************************************************
+	{ 0x0450, 0x00000120 }, //VPCTRL
+	{ 0x0454, 0x00500014 }, //HTIM1
+	//{ 0458
+	{ 0x045C, 0x000A000A }, //VTIM1
+	//{ 0460
+	{ 0x0464, 0x00000001 }, //VFUEN
+	{ 0x04A0, 0x00000006 }, //LVPHY0
+	//sleep 1
+	{ 0x04A0, 0x00000006 }, //LVPHY0
+	{ 0x0504, 0x00000004 }, //SYSRST
+	//{ **************************************************
+	//{ TC358764/65XBG LVDS Color mapping setting
+	//{ **************************************************
+	{ 0x0480, 0x03020100 }, //LVMX0003
+	{ 0x0484, 0x08050704 }, //LVMX0407
+	{ 0x0488, 0x0F0E0A09 }, //LVMX0811
+	{ 0x048C, 0x100D0C0B }, //LVMX1215
+	{ 0x0490, 0x12111716 }, //LVMX1619
+	{ 0x0494, 0x1B151413 }, //LVMX2023
+	{ 0x0498, 0x061A1918 }, //LVMX2427
+	//{ **************************************************
+	//{ TC358764/65XBG LVDS enable
+	//{ **************************************************
+	{ 0x049C, 0x00000403 }, //LVCFG
+};
 
-#endif
-//{ **************************************************
-//{ TC358764/65XBG LVDS enable
-//{ **************************************************
-{ 0x049C, 0x00000101 }, //LVCFG
-#endif
+struct reg_val_t initcode_75[] = {
+	{	0x013C	,0x00030005},//	PPI_TX_RX_TA  BTA parameters	LP
+	{	0x0114	,0x00000003},//		PPI_LPTXTIMCNT	LP
+	{	0x0164	,0x00000004},//		PPI_D0S_CLRSIPOCOUNT	LP
+	{	0x0168	,0x00000004},//		PPI_D1S_CLRSIPOCOUNT	LP
+	{	0x016C	,0x00000004},//		PPI_D2S_CLRSIPOCOUNT	LP
+	{	0x0170	,0x00000004},//		PPI_D3S_CLRSIPOCOUNT	LP
+	{	0x0134	,0x0000001F},//		PPI_LANEENABLE	LP
+	{	0x0210	,0x0000001F},//		DSI_LANEENABLE	LP
+	{	0x0104	,0x00000001},//		PPI_SARTPPI	LP
+	{	0x0204	,0x00000001},//		DSI_SARTPPI	LP
+				
+	//{	**************************************************			
+	//{	TC358774/75XBG Timing and mode setting			
+	//{	**************************************************			
+	{	0x0450	,0x03F00100},//		VPCTRL	LP or HS
+	{	0x0454	,0x0032001C},//		HTIM1	LP or HS
+	{	0x0458	,0x00320690},//		HTIM2	LP or HS
+	{	0x045C	,0x00040002},//		VTIM1	LP or HS
+	{	0x0460	,0x000A041A},//		VTIM2	LP or HS
+	{	0x0464	,0x00000001},//		VFUEN	LP or HS
+	{	0x04A0	,0x0044802D},//		LVPHY0	LP or HS		
+	{	0x04A0	,0x0004802D},//		LVPHY0	LP or HS
+	{	0x0504	,0x00000004},//		SYSRST	LP or HS
+	//{	**************************************************			
+	//{	TC358774/75XBG LVDS Color mapping setting			
+	//{	**************************************************			
+	{	0x0480	,0x03020100},//		LVMX0003	LP or HS
+	{	0x0484	,0x08050704},//		LVMX0407	LP or HS
+	{	0x0488	,0x0F0E0A09},//		LVMX0811	LP or HS
+	{	0x048C	,0x100D0C0B},//		LVMX1215	LP or HS
+	{	0x0490	,0x12111716},//		LVMX1619	LP or HS
+	{	0x0494	,0x1B151413},//		LVMX2023	LP or HS
+	{	0x0498	,0x061A1918},//		LVMX2427	LP or HS
+	//{	**************************************************			
+	//{	TC358774/75XBG LVDS enable			
+	//{	**************************************************			
+	{	0x049C	,0x00000433},//		LVCFG	LP or HS
 };
 
 #define I2C_ADDRESS 0x0F
@@ -168,13 +158,23 @@ static int i2c_read(u16 reg)
 
 static int init_lcd_by_i2c()
 {
-	adap = i2c_get_adapter(15);
-	
 	int i;
-	for (i = 0; i < ARRAY_SIZE(initcode); i++) {
-		i2c_write(initcode[i].reg, initcode[i].data);
-	     	mdelay(10); 
+	int chip_id;
+
+	adap = i2c_get_adapter(15);
+	chip_id = (i2c_read(0x0580) >> 8) & 0xFF;
+
+	if (chip_id == 0x75) {
+		for (i = 0; i < ARRAY_SIZE(initcode_75); i++) {
+			i2c_write(initcode_75[i].reg, initcode_75[i].data);
+		}
+	} else {
+		for (i = 0; i < ARRAY_SIZE(initcode_65); i++) {
+			i2c_write(initcode_65[i].reg, initcode_65[i].data);
+		}	
 	}
+
+	mdelay(10); 
 
 
 	printk("0x013C : %08x\n",i2c_read(0x013C));
@@ -209,20 +209,37 @@ static int init_lcd_by_i2c()
 static int init_lcd(struct mipi_dsim_device *dsim)
 {
 #if 1
-    	unsigned char   cmd[6], i;
-
-	for (i = 0; i < ARRAY_SIZE(initcode); i++) {
-	    cmd[0] = initcode[i].reg;	       cmd[1] = initcode[i].reg  >> 8;
-	    cmd[2] = initcode[i].data;         cmd[3] = initcode[i].data >> 8;
-	    cmd[4] = initcode[i].data >> 16;   cmd[5] = initcode[i].data >> 24;
-
-            if(s5p_mipi_dsi_wr_data(dsim, MIPI_DSI_GENERIC_LONG_WRITE, (unsigned int)cmd, sizeof(cmd)) == -1)   
-		return  0;
-    	
-    	    mdelay(10);    
-	}
+    	unsigned char   cmd[6], i, chip_id;
 
 	adap = i2c_get_adapter(15);
+	chip_id = (i2c_read(0x0580) >> 8) & 0xFF;
+
+	printk("MIPI DSI CHIP ID = %02x\n", chip_id);
+
+	if (chip_id == 0x75) {
+		for (i = 0; i < ARRAY_SIZE(initcode_75); i++) {
+		    cmd[0] = initcode_75[i].reg;	       cmd[1] = initcode_75[i].reg  >> 8;
+		    cmd[2] = initcode_75[i].data;         cmd[3] = initcode_75[i].data >> 8;
+		    cmd[4] = initcode_75[i].data >> 16;   cmd[5] = initcode_75[i].data >> 24;
+
+		    if(s5p_mipi_dsi_wr_data(dsim, MIPI_DSI_GENERIC_LONG_WRITE, (unsigned int)cmd, sizeof(cmd)) == -1)   
+			return  0;       
+		}
+	} else {
+
+		for (i = 0; i < ARRAY_SIZE(initcode_65); i++) {
+		    cmd[0] = initcode_65[i].reg;	       cmd[1] = initcode_65[i].reg  >> 8;
+		    cmd[2] = initcode_65[i].data;         cmd[3] = initcode_65[i].data >> 8;
+		    cmd[4] = initcode_65[i].data >> 16;   cmd[5] = initcode_65[i].data >> 24;
+
+		    if(s5p_mipi_dsi_wr_data(dsim, MIPI_DSI_GENERIC_LONG_WRITE, (unsigned int)cmd, sizeof(cmd)) == -1)   
+			return  0;       
+		}
+	}
+
+	mdelay(10); 
+
+	
 
 	printk("0x013C : %08x\n",i2c_read(0x013C));
 	printk("0x0114 : %08x\n",i2c_read(0x0114));
