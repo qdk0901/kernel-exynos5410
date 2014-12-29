@@ -42,6 +42,9 @@
 #define TARGET_SRPCLK_RATE	(100000000)
 #define TARGET_BUSCLK_RATE	(TARGET_SRPCLK_RATE >> 1)
 
+//just make the i2s div to zero
+#define TARGET_I2SCLK_RATE	(400000000)
+
 #define msecs_to_loops(t) (loops_per_jiffy / 1000 * HZ * t)
 
 struct i2s_dai {
@@ -1121,6 +1124,7 @@ static int clk_set_heirachy(struct i2s_dai *i2s)
 
 	clk_set_rate(i2s->dout_srp, TARGET_SRPCLK_RATE);
 	clk_set_rate(i2s->dout_bus, TARGET_BUSCLK_RATE);
+	clk_set_rate(i2s->dout_i2s, TARGET_I2SCLK_RATE);
 
 	dev_info(&i2s->pdev->dev, "EPLL rate = %ld\n", clk_get_rate(fout_epll));
 	dev_info(&i2s->pdev->dev, "SRP rate = %ld\n", clk_get_rate(i2s->dout_srp));

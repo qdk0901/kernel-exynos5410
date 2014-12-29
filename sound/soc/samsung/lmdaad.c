@@ -10,6 +10,8 @@
 #include <linux/delay.h>
 
 #include <asm/mach-types.h>
+#include <mach/map.h>
+#include <asm/io.h>
 
 #include "i2s.h"
 
@@ -179,6 +181,10 @@ static int smdk_hw_params(struct snd_pcm_substream *substream,
 	}
 
 	printk("rclk:%d, psr:%d\n", rclk, psr);
+	printk("AUDSS SRC %08x\n", __raw_readl(S5P_VA_AUDSS + 0x0));
+	printk("AUDSS DIV %08x\n", __raw_readl(S5P_VA_AUDSS + 0x4));
+	
+	
 
 	return 0;
 }
