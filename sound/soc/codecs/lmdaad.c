@@ -17,7 +17,7 @@
  * Note this is a simple chip with no configuration interface, sample rate is
  * determined automatically by examining the Master clock and Bit clock ratios
  */
-#define LMDAAD_RATES  (SNDRV_PCM_RATE_44100)
+#define LMDAAD_RATES  (SNDRV_PCM_RATE_48000 | SNDRV_PCM_RATE_44100)
 
 
 static struct snd_soc_dai_driver lmdaad_dai[] = {

@@ -14,6 +14,7 @@
 #include <asm/io.h>
 
 #include "i2s.h"
+#include "i2s-regs.h"
 
 static struct clk *mclk;
 static struct clk *xxti_clk;
@@ -50,7 +51,9 @@ static int smdk_hw_params(struct snd_pcm_substream *substream,
 
 	int ret = 0;
 
-	ret = snd_soc_dai_set_fmt(cpu_dai, SND_SOC_DAIFMT_LEFT_J
+	printk("lmdaad format %d\n", params_format(params));
+
+	ret = snd_soc_dai_set_fmt(cpu_dai, SND_SOC_DAIFMT_I2S
 					 | SND_SOC_DAIFMT_NB_NF
 					 | SND_SOC_DAIFMT_CBM_CFM);
 	if (ret < 0)
