@@ -25,6 +25,9 @@
 #include <plat/gpio-cfg.h>
 #include <plat/devs.h>
 #include <plat/iic.h>
+#include <linux/spi/spi.h>
+#include <linux/spi/spi_gpio.h>
+
 
 #include "board-yamo5410.h"
 
@@ -194,6 +197,56 @@ static struct platform_device yamo5410_wm8994 = {
 #endif  // CONFIG_SND_SOC_WM8994
 
 #ifdef CONFIG_SND_SOC_SMDK_LMDAAD
+/*
+	// use these four pins for dsp control
+	EXYNOS5410_GPA1(2),
+	EXYNOS5410_GPA1(3),
+	EXYNOS5410_GPB2(2),
+	EXYNOS5410_GPB2(3),
+*/
+#if 1
+#define CS EXYNOS5410_GPA1(2)
+#define SCK EXYNOS5410_GPA1(3)
+#define MOSI EXYNOS5410_GPB2(2)
+#define MISO EXYNOS5410_GPB2(3)
+#else
+#define CS EXYNOS5410_GPX0(6)//SPI_GPIO_NO_CHIPSELECT
+#define SCK EXYNOS5410_GPB1(4) 
+#define MOSI EXYNOS5410_GPB1(3)
+#define MISO SPI_GPIO_NO_MISO
+#endif
+
+static struct spi_gpio_platform_data lm_gpio_spi = {
+	.sck			= SCK,
+	.mosi			= MOSI,
+	.miso			= MISO,
+	.num_chipselect = 1,
+};
+
+static struct platform_device lm_gpio_spi_device = {
+	.name			= "spi_gpio",
+	.id			= 0,
+	.dev.platform_data	= &lm_gpio_spi,
+};
+
+static struct spi_board_info lm_spi_devices[] __initdata = {
+        {
+                .modalias               = "spidev",
+                .max_speed_hz           = 1000000,
+                .bus_num                = 0,
+                .chip_select            = 0,
+		.mode = SPI_MODE_3,
+                .controller_data        = (void *) CS,
+        },
+};
+
+static void __init lm_init_spi(void)
+{
+        spi_register_board_info(lm_spi_devices,
+                                ARRAY_SIZE(lm_spi_devices));
+        platform_device_register(&lm_gpio_spi_device);
+}
+
 static struct platform_device lmdaad_soc = {
 	.name = "lmdaad-soc",
 	.id = -1,
@@ -241,6 +294,9 @@ void __init exynos5_yamo5410_audio_init(void)
 	i2c_register_board_info(10, i2c_devs_wm8994, ARRAY_SIZE(i2c_devs_wm8994));
 #endif
 
+#ifdef CONFIG_SND_SOC_SMDK_LMDAAD
+	lm_init_spi();
+#endif
 	platform_add_devices(yamo5410_audio_devices,
 			ARRAY_SIZE(yamo5410_audio_devices));
 }
