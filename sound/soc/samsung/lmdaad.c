@@ -208,24 +208,22 @@ enum {
 	PLAYBACK = 0,
 };
 
-static struct snd_soc_dai_link lmdaad_dai[] = {
-	[PLAYBACK] = {
-		.name = "LMDAAD RX",
-		.stream_name = "Playback",
-		.cpu_dai_name = "samsung-i2s.0",
-		.codec_dai_name = "lmdaad-hifi-playback",
-		.platform_name = "samsung-audio",
-		.codec_name = "lmdaad-codec",
-		.ops = &lmdaad_ops,
-		.init = smdk_lmdaad_init_paiftx,
-	},
+static struct snd_soc_dai_link lmdaad_dai = {
+	.name = "lmdaad-machine",
+	.stream_name = "lmdaad-stream",
+	.cpu_dai_name = "samsung-i2s.0",
+	.codec_dai_name = "lmdaad-codec",
+	.platform_name = "samsung-audio",
+	.codec_name = "lmdaad-codec",
+	.ops = &lmdaad_ops,
+	.init = smdk_lmdaad_init_paiftx,
 };
 
 static struct snd_soc_card lmdaad = {
 	.name = "lmdaad-card",
 	.owner = THIS_MODULE,
-	.dai_link = lmdaad_dai,
-	.num_links = ARRAY_SIZE(lmdaad_dai),
+	.dai_link = &lmdaad_dai,
+	.num_links = 1,
 };
 
 static struct platform_device *smdk_snd_device;

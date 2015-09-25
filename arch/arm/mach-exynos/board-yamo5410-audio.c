@@ -295,7 +295,7 @@ void __init exynos5_yamo5410_audio_init(void)
 #endif
 
 #ifdef CONFIG_SND_SOC_SMDK_LMDAAD
-	lm_init_spi();
+	//lm_init_spi();
 #endif
 	platform_add_devices(yamo5410_audio_devices,
 			ARRAY_SIZE(yamo5410_audio_devices));

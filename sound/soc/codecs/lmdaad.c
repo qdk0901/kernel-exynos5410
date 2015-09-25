@@ -22,9 +22,16 @@
 
 static struct snd_soc_dai_driver lmdaad_dai[] = {
 	{
-		.name = "lmdaad-hifi-playback",
+		.name = "lmdaad-codec",
 		.playback = {
-			.stream_name = "Playback",
+			.stream_name = "lmdaad-codec-playback",
+			.channels_min = 1,
+			.channels_max = 2,
+			.rates = LMDAAD_RATES,
+			.formats = SNDRV_PCM_FMTBIT_S16_LE | SNDRV_PCM_FMTBIT_S24_LE,
+		},
+		.capture = {
+			.stream_name = "lmdaad-codec-capture",
 			.channels_min = 1,
 			.channels_max = 2,
 			.rates = LMDAAD_RATES,
